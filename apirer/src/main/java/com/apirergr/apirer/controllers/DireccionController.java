@@ -2,6 +2,7 @@ package com.apirergr.apirer.controllers;
 import com.apirergr.apirer.modelos.Direccion;
 import com.apirergr.apirer.repositorios.DireccionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -24,5 +25,16 @@ public class DireccionController {
     @PostMapping
     public Direccion crearDireccion(@RequestBody Direccion direccion) {
         return direccionRepo.save(direccion);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarDireccion(@PathVariable Long id) {
+        if (direccionRepo.existsById(id)) {
+            direccionRepo.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

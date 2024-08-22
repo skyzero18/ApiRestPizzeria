@@ -2,6 +2,7 @@ package com.apirergr.apirer.controllers;
 import com.apirergr.apirer.modelos.Pizzeria;
 import com.apirergr.apirer.repositorios.PizzeriaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -26,4 +27,13 @@ public class PizzeriaController {
         return pizzeriaRepo.save(pizzeria);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarPizzeria(@PathVariable Long id) {
+        if (pizzeriaRepo.existsById(id)) {
+            pizzeriaRepo.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
