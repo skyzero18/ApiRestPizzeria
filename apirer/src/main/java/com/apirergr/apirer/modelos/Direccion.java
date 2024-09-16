@@ -32,6 +32,9 @@ public class Direccion {
     @JoinColumn(name = "clientes_id")
     private Clientes clientes;
 
+    @OneToOne(mappedBy = "direccion")
+    private Pizzeria pizzeria;
+
     public Direccion(String calle,String numero, String ciudad, String codigoPostal) {
         this.calle = calle;
         this.numero=numero;
