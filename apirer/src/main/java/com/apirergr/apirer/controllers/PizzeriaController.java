@@ -1,39 +1,39 @@
 package com.apirergr.apirer.controllers;
 import com.apirergr.apirer.modelos.Pizzeria;
-import com.apirergr.apirer.repositorios.PizzeriaRepo;
+import com.apirergr.apirer.servicios.PizzeriaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/pizzeria")
 public class PizzeriaController {
+
     @Autowired
-    private PizzeriaRepo pizzeriaRepo;
+    private PizzeriaService pizzeriaService;
 
     @GetMapping
-    public List<Pizzeria> obtenerTodasPizzeria() {
-        return pizzeriaRepo.findAll();
+    public List<Pizzeria> getAllPizzeria(){
+        return pizzeriaService.getAllPizzerias();
     }
 
     @GetMapping("/{id}")
-    public Pizzeria obtenerPizzeriaPorId(@PathVariable Long id) {
-        return pizzeriaRepo.findById(id).orElse(null);
+    public Pizzeria getPizzeriaById(@PathVariable Long id) {
+        return pizzeriaService.getPizzeriaById(id);
     }
 
     @PostMapping
-    public Pizzeria crearPizzeria(@RequestBody Pizzeria pizzeria) {
-        return pizzeriaRepo.save(pizzeria);
+    public Pizzeria createPizzeria(@RequestBody Pizzeria pizzeria) {
+        return pizzeriaService.savePizzeria(pizzeria);
+    }
+
+    @PutMapping("/{id}")
+    public Pizzeria updatePizzeria(@PathVariable Long id, @RequestBody Pizzeria pizzeria) {
+        return pizzeriaService.updatePizzeria(id, pizzeria);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarPizzeria(@PathVariable Long id) {
-        if (pizzeriaRepo.existsById(id)) {
-            pizzeriaRepo.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void deletePizzeria(@PathVariable Long id) {
+        pizzeriaService.deletePizzeria(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.apirergr.apirer.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,13 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "vendedores")
 public class Vendedores {
-
-    public Vendedores(String nombre, String DNI,String apellido, String experiencia) {
-        this.nombre = nombre;
-        this.DNI = DNI;
-        this.apellido = apellido;
-        this.experiencia = experiencia;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vendedorgn")
@@ -40,10 +34,18 @@ public class Vendedores {
     @ManyToOne
     @JoinColumn(name = "pizzeria_id")
     private Pizzeria pizzeria;
+    @JsonIgnore
 
-
-    @OneToMany(mappedBy = "vendedor", fetch = FetchType.LAZY)
+    @ManyToMany (targetEntity = Clientes.class, fetch = FetchType.LAZY)
     private List<Clientes> clientes;
+    @JsonIgnore
+
+    public Vendedores(String nombre, String DNI,String apellido, String experiencia) {
+        this.nombre = nombre;
+        this.DNI = DNI;
+        this.apellido = apellido;
+        this.experiencia = experiencia;
+    }
 
     @Override
     public String toString() {

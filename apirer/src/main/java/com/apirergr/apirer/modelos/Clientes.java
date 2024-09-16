@@ -1,9 +1,13 @@
 package com.apirergr.apirer.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 
 @Entity
@@ -30,10 +34,14 @@ public class Clientes {
     @Column(name = "DNI", nullable = false)
     private String DNI;
 
-    @ManyToOne
-    @JoinColumn(name = "vendedor_id")
-    private Vendedores vendedor;
+    @OneToMany(targetEntity = Direccion.class, fetch = FetchType.LAZY)
+    private List<Direccion> direcciones;
+    @JsonIgnore
 
+    @ManyToMany (targetEntity = Vendedores.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "vendedor_id")
+    private List<Vendedores> vendedor;
+    @JsonIgnore
 
     public Clientes(String nombre, String apellido, String celular, String DNI) {
         this.nombre = nombre;

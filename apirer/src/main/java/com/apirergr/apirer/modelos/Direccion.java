@@ -1,5 +1,6 @@
 package com.apirergr.apirer.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,31 +21,33 @@ public class Direccion {
     @Column(name = "calle", nullable = false)
     private String calle;
 
+    @Column(name = "numero", nullable = false)
+    private String numero;
+
     @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
-    @Column(name = "codigoPostal", nullable = false)
+    @Column(name = "codigo_postal", nullable = false)
     private String codigoPostal;
 
-    @OneToOne(mappedBy = "direccion", cascade = CascadeType.ALL)
-    private Pizzeria pizzeria;
-
-    @ManyToOne
+    @ManyToOne(targetEntity = Clientes.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "clientes_id")
     private Clientes clientes;
+    @JsonIgnore
 
-
-    public Direccion(String calle, String ciudad, String codigoPostal) {
+    public Direccion(String calle,String numero, String ciudad, String codigoPostal) {
         this.calle = calle;
+        this.numero=numero;
         this.ciudad = ciudad;
         this.codigoPostal = codigoPostal;
     }
 
     @Override
     public String toString() {
-        return "direccion{" +
+        return "Direccion{" +
                 "id=" + id +
                 ", calle='" + calle + '\'' +
+                ", numero='" + numero + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", codigoPostal='" + codigoPostal + '\'' +
                 '}';

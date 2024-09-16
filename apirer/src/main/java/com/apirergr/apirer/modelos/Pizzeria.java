@@ -1,9 +1,12 @@
 package com.apirergr.apirer.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -25,11 +28,12 @@ public class Pizzeria {
     @Column(name = "fundacion", nullable = false)
     private String fundacion;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(targetEntity = Direccion.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccion;
 
-
+    @OneToMany (targetEntity = Vendedores.class, fetch = FetchType.LAZY)
+    private List<Vendedores> vendedores;
 
     public Pizzeria(String nombre, String propietario, String fundacion) {
         this.nombre = nombre;
