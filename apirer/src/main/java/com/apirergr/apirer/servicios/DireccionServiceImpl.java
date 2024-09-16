@@ -1,11 +1,8 @@
 package com.apirergr.apirer.servicios;
-
 import com.apirergr.apirer.modelos.Direccion;
-import com.apirergr.apirer.repositorios.ClienteRepo;
 import com.apirergr.apirer.repositorios.DireccionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +11,6 @@ public class DireccionServiceImpl implements DireccionService {
 
     @Autowired
     private DireccionRepo direccionRepo;
-    @Autowired
-    private ClienteRepo clienteRepo;
 
     @Override
     public List<Direccion> getAllDirecciones() {
@@ -41,7 +36,6 @@ public class DireccionServiceImpl implements DireccionService {
     public Direccion updateDireccion(Long id, Direccion direccion) {
         Direccion existingDireccion = getDireccionById(id);
 
-        // Actualiza los campos de la dirección existente con los datos de la dirección actualizada
         existingDireccion.setCalle(direccion.getCalle());
         existingDireccion.setNumero(direccion.getNumero());
         existingDireccion.setCiudad(direccion.getCiudad());
@@ -50,7 +44,6 @@ public class DireccionServiceImpl implements DireccionService {
 
         existingDireccion.setClientes(direccion.getClientes());
 
-        // Guarda la dirección actualizada en la base de datos
         return direccionRepo.save(existingDireccion);
     }
 

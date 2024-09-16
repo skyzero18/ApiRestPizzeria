@@ -1,8 +1,6 @@
 package com.apirergr.apirer.servicios;
-
 import com.apirergr.apirer.modelos.Vendedores;
 import java.util.List;
-import java.util.Optional;
 
 public interface VendedoresService {
     List<Vendedores> getAllVendedores();

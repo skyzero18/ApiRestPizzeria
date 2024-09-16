@@ -1,7 +1,5 @@
 package com.apirergr.apirer.servicios;
-
 import com.apirergr.apirer.modelos.Clientes;
-
 import java.util.List;
 
 public interface ClienteService {

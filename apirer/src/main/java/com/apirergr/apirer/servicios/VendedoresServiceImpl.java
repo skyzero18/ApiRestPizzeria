@@ -1,11 +1,8 @@
 package com.apirergr.apirer.servicios;
-
-import com.apirergr.apirer.modelos.Clientes;
 import com.apirergr.apirer.modelos.Vendedores;
 import com.apirergr.apirer.repositorios.VendedoresRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

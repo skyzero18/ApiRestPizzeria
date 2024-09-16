@@ -1,11 +1,8 @@
 package com.apirergr.apirer.modelos;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Entity
@@ -28,11 +25,11 @@ public class Pizzeria {
     @Column(name = "fundacion", nullable = false)
     private String fundacion;
 
-    @OneToOne(targetEntity = Direccion.class, fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = Direccion.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccion;
 
-    @OneToMany (targetEntity = Vendedores.class, fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "pizzeria", targetEntity = Vendedores.class, fetch = FetchType.LAZY)
     private List<Vendedores> vendedores;
 
     public Pizzeria(String nombre, String propietario, String fundacion) {

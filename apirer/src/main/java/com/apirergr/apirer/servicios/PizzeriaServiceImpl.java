@@ -1,16 +1,14 @@
 package com.apirergr.apirer.servicios;
-
 import com.apirergr.apirer.modelos.Pizzeria;
-
 import com.apirergr.apirer.repositorios.PizzeriaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PizzeriaServiceImpl implements PizzeriaService {
+
     @Autowired
     private PizzeriaRepo pizzeriaRepo;
 
@@ -38,7 +36,6 @@ public class PizzeriaServiceImpl implements PizzeriaService {
     public Pizzeria updatePizzeria(Long id, Pizzeria pizzeria) {
         Pizzeria existingPizzeria = getPizzeriaById(id);
 
-        // Actualiza los campos de la pizzería existente con los datos de la pizzería actualizada
         existingPizzeria.setNombre(pizzeria.getNombre());
         existingPizzeria.setPropietario(pizzeria.getPropietario());
         existingPizzeria.setFundacion(pizzeria.getFundacion());
@@ -46,7 +43,6 @@ public class PizzeriaServiceImpl implements PizzeriaService {
         existingPizzeria.setDireccion(pizzeria.getDireccion());
         existingPizzeria.setVendedores(pizzeria.getVendedores());
 
-        // Guarda la pizzería actualizada en la base de datos
         return pizzeriaRepo.save(existingPizzeria);
     }
 

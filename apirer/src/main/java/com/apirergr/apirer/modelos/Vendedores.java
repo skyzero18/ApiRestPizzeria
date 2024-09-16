@@ -1,6 +1,4 @@
 package com.apirergr.apirer.modelos;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,7 @@ import java.util.List;
 public class Vendedores {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vendedorgn")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(name = "vendedorgn", sequenceName = "vendedorsq", allocationSize = 1)
     private Long id;
 
@@ -34,11 +32,9 @@ public class Vendedores {
     @ManyToOne
     @JoinColumn(name = "pizzeria_id")
     private Pizzeria pizzeria;
-    @JsonIgnore
 
     @ManyToMany (targetEntity = Clientes.class, fetch = FetchType.LAZY)
     private List<Clientes> clientes;
-    @JsonIgnore
 
     public Vendedores(String nombre, String DNI,String apellido, String experiencia) {
         this.nombre = nombre;
