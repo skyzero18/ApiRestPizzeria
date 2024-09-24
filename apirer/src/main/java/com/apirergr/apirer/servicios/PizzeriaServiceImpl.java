@@ -23,7 +23,7 @@ public class PizzeriaServiceImpl implements PizzeriaService {
         if (pizzeria.isPresent()) {
             return pizzeria.get();
         } else {
-            throw new RuntimeException("Pizzeria no encontrada para el id: " + id);
+            throw new RuntimeException("no se encontro la pizzeria " + id);
         }
     }
 

@@ -23,7 +23,7 @@ public class VendedoresServiceImpl implements VendedoresService {
         if (vendedor.isPresent()) {
             return vendedor.get();
         }else {
-            throw new RuntimeException("Vendedor no encontrado para el id " + id);
+            throw new RuntimeException("no se encontro el vendedor " + id);
         }
     }
 

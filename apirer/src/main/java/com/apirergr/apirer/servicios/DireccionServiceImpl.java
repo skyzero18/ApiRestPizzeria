@@ -23,7 +23,7 @@ public class DireccionServiceImpl implements DireccionService {
         if (direccion.isPresent()) {
             return direccion.get();
         } else {
-            throw new RuntimeException("Dirección no encontrada para el id: " + id);
+            throw new RuntimeException("no se encontro la direccion " + id);
         }
     }
 

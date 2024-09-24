@@ -23,7 +23,7 @@ public class ClienteServiceImpl implements ClienteService {
         if (cliente.isPresent()) {
             return cliente.get();
         } else {
-            throw new RuntimeException("Cliente no encontrado para el id: " + id);
+            throw new RuntimeException("no se encontro el cliente " + id);
         }
     }
 
