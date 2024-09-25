@@ -30,7 +30,7 @@ public class Pizzeria {
     @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccion;
 
-    @OneToMany (mappedBy = "pizzeria", targetEntity = Vendedores.class, fetch = FetchType.LAZY)
+    @OneToMany (targetEntity = Vendedores.class, fetch = FetchType.LAZY)
     private List<Vendedores> vendedores;
 
     public Pizzeria(String nombre, String propietario, String fundacion) {
