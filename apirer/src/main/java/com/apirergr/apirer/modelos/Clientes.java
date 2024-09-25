@@ -1,5 +1,6 @@
 package com.apirergr.apirer.modelos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,12 +33,14 @@ public class Clientes {
 
     @OneToMany(targetEntity = Direccion.class, fetch = FetchType.LAZY)
     private List<Direccion> direcciones;
-    @JsonIgnore
 
     @ManyToMany (targetEntity = Vendedores.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "vendedor_id")
-    private List<Vendedores> vendedor;
+    @JoinTable(name = "clientes_vendedores",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "vendedor_id"))
     @JsonIgnore
+    private List<Vendedores> vendedor;
+
 
     public Clientes(String nombre, String apellido, String celular, String DNI) {
         this.nombre = nombre;

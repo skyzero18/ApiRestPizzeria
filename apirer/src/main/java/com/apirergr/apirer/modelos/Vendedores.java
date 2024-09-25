@@ -1,4 +1,5 @@
 package com.apirergr.apirer.modelos;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class Vendedores {
 
     @ManyToOne
     @JoinColumn(name = "pizzeria_id")
+    @JsonIgnore
     private Pizzeria pizzeria;
 
     @ManyToMany (targetEntity = Clientes.class, fetch = FetchType.LAZY)

@@ -1,4 +1,6 @@
 package com.apirergr.apirer.modelos;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,9 +32,11 @@ public class Direccion {
 
     @ManyToOne(targetEntity = Clientes.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "clientes_id")
+    @JsonIgnore
     private Clientes clientes;
 
     @OneToOne(mappedBy = "direccion")
+    @JsonIgnore
     private Pizzeria pizzeria;
 
     public Direccion(String calle,String numero, String ciudad, String codigoPostal) {
